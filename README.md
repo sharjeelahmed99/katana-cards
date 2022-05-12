@@ -24,6 +24,16 @@
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript repository.
 
+
+## Assumptions
+Non shuffled default deck order is not mentioned. Making this as configrable through initial seed data. 
+This order can be changed in migration file for the seed data of cards.
+```bash
+ /src/migrations/1652353443483-seedData.ts
+```
+For SHORT deck, skipping 2-6 rank cards(as mentioned in document) will give us a total of 32 cards instead of 36 mentioned in problem statement.
+"When user has specified that they want the deck created deck to be short deck (SHORT), it should only include 36 cards."
+Assuming this is a mistake in the document.
 ## Installation
 
 ```bash
@@ -36,6 +46,13 @@ $ npm install
 $ npm run start:docker
 ```
 
+Migrations will auto run when the container is Up.
+If somehow migrations do not run by their own, can be manually run by using below command.
+
+```bash
+$ npm run migration:run
+```
+Note: Before running migrations, please make sure container is running.
 ## Unit/Integration tests
 Tests suits will run in seperate contianers, I have created test-docker-compose.yml file for it.
 
