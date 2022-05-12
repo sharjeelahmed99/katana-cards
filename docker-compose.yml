@@ -1,0 +1,44 @@
+version: '3.7'
+
+services:
+  main:
+    container_name: cards
+    build:
+      context: .
+      target: development
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - ${PORT}:${PORT}
+      - 9229:9229
+    command: npm run start:dev
+    env_file:
+      - .env
+    environment:
+      DATABASE_URL: postgres://postgres:pass@postgres:5432/db-cards
+      TYPEORM_MIGRATIONS: dist/migration/*.js
+    networks:
+      - brone
+    depends_on:
+      - postgres
+  postgres:
+    container_name: postgres-cards
+    image: postgres:12
+    networks:
+      - brone
+    env_file:
+      - .env
+    environment:
+      POSTGRES_PASSWORD: pass
+      POSTGRES_USER: postgres
+      POSTGRES_DB: db-cards
+      PG_DATA: /var/lib/postgresql/data
+    ports:
+      - 5435:5432
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+networks:
+  brone:
+volumes:
+  pgdata:
