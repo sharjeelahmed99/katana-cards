@@ -37,7 +37,8 @@ $ npm run start:docker
 ```
 
 ## Unit/Integration tests
-Tests suits will run in seperate contianers, I have created test-docker-compose.yml file for it
+Tests suits will run in seperate contianers, I have created test-docker-compose.yml file for it.
+
 Unit/integration test file is added test/cards.e2e-spec.ts and you can execute it by using command
 ```bash
 $ npm run start:docker-test
